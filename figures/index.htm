@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <title>HBaseInAction.com</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- leaflet -->
+    <link rel="stylesheet" href="js/leaflet-0.3.1/leaflet.css" />
+    <script src="js/leaflet-0.3.1/leaflet.js"></script>
+    <script type="text/javascript" src="js/tile.stamen-1.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.min-1.7.1.js"></script>
+
+    <style type="text/css">
+      .leaflet-popup-content {text-align: center;}
+      .leaflet-popup-tip-container {visibility: hidden;}
+    </style>
+    <body>
+      <h2>Figure 8.1</h2>
+      <div id="map8.1" style="height: 600px; width: 690px;"></div>
+    </body>
+
+    <script type="text/javascript">
+      var baselayer = new L.StamenTileLayer('watercolor');
+      var popOpts = {closeButton:false};
+
+      L.PopupLeft = L.Popup.extend({
+        initialize: function(options, source) {
+          opts = {
+            className: $.trim(options.className) + ' leaflet-popup-left',
+          };
+          opts = $.extend(true, opts, options);
+          L.Util.setOptions(this, opts);
+          this._source = source;
+        },
+        _updateLayout: function() {
+          this._container.style.width = '';
+          this._container.style.whitespace = 'nowrap';
+          var width = this._container.offsetWidth;
+          width = (width > this.options.maxWidth ?
+                    this.options.maxWidth :
+                    (width < this.options.minWidth ? this.options.minWidth : width));
+          width += this._tipContainer.offsetWidth;
+          this._container.style.width = width + 'px';
+          this._container.style.whiteSpace = '';
+          this._containerWidth = this._container.offsetWidth;
+        },
+      });
+
+      var contentStr = function(name, lat, lon) {
+        return "<p><b>" + name + "</b><br />" + lat + ", " + lon + "</p>";
+      };
+      var addMarker = function(x) {
+        x.mark = new L.Marker(x.position);
+        return x;
+      };
+      var addPopup = function(x, dir) {
+        opts = $.extend(true, {offset: x.mark.options.icon.popupAnchor}, popOpts);
+        if (!dir) {
+          dir = 'top';
+        }
+
+        if (dir === 'top') {
+          x.pop = new L.Popup(opts).setContent(x.content)
+                                   .setLatLng(x.position);
+        } else if (dir === 'left') {
+          x.pop = new L.PopupLeft(opts).setContent(x.content)
+                                       .setLatLng(x.position);
+        }
+        return x;
+      };
+
+      var centralPark = new L.LatLng(40.78, -73.97);
+      var bogota = {
+        position: new L.LatLng(4.598056,-74.075833),
+        content: contentStr("Bogotá", "4.60°N", "74.08°W"),
+      };
+      addMarker(bogota);
+      addPopup(bogota)
+
+      var nyc = {
+        position: new L.LatLng(40.664167,-73.938611),
+        content: contentStr("New York City", "40.66°N", "73.94°W"),
+      };
+      addMarker(nyc);
+      addPopup(nyc);
+
+      var dc = {
+        position: new L.LatLng(38.895111,-77.036667),
+        content: contentStr("Washington, DC", "38.90°N", "77.04°W"),
+      };
+      addMarker(dc);
+      addPopup(dc);
+
+      var map = new L.Map('map8.1');
+      var fig81 = new L.LayerGroup();
+      fig81.addLayer(dc.mark);
+      fig81.addLayer(dc.pop);
+      fig81.addLayer(nyc.mark);
+      fig81.addLayer(nyc.pop);
+      fig81.addLayer(bogota.mark);
+      fig81.addLayer(bogota.pop);
+      map.setView(new L.LatLng(26.03704188651584,-78.0908203125), 4).addLayer(baselayer).addLayer(fig81);
+    </script>
+  </head>
+</html>
