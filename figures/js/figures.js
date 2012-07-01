@@ -118,6 +118,18 @@ L.FeatureCollection = L.Class.extend({
     };
     this.features.push(line);
     return this;
+  },
+  addPolygon: function(props, coords) {
+    var polygon = {
+      type: "Feature",
+      properties: props,
+      geometry: {
+        type: "Polygon",
+        coordinates: coords
+      }
+    };
+    this.features.push(polygon);
+    return this;
   }
 });
 
@@ -184,9 +196,6 @@ map82points.on('featureparse', function(e) {
   if (e.properties && e.properties.id) {
     e.layer.bindPopup("" + e.properties.id);
   }
-  if (e.geometryType == "LineString") {
-    console.log(e);
-  }
   if (e.properties && e.properties.style && e.layer.setStyle) {
     e.layer.setStyle(e.properties.style);
   }
@@ -237,3 +246,132 @@ var map84base = new L.StamenTileLayer('watercolor');
 map84.setView(new L.LatLng(40.72852712420599,-73.90777587890625), 11)
      .addLayer(map84base)
      .addLayer(fig84);
+
+////
+// figure 8.7
+//
+
+var polyFromCorners = function(a, b) {
+  return [[a[0], a[1]],
+          [a[0], b[1]],
+          [b[0], b[1]],
+          [b[0], a[1]],
+          [a[0], a[1]]];
+};
+
+var midpointFromCorners = function(a, b) {
+  return [(a[0] + b[0]) / 2,
+          (a[1] + b[1]) / 2];
+};
+
+var geohashNeighbors = new L.FeatureCollection();
+geohashNeighbors.addPolygon(
+  {style: {
+     color: "#457FCD",
+     weight: 2,
+     opacity: 0.8
+   }},
+  // dr72h8p
+  [polyFromCorners([-73.97232055664062, 40.782623291015625],
+                   [-73.970947265625, 40.78125]),
+   // dr72hb0
+   polyFromCorners([-73.970947265625, 40.782623291015625],
+                   [-73.96957397460938, 40.78125]),
+   // dr72hb1
+   polyFromCorners([-73.96957397460938, 40.782623291015625],
+                   [-73.96820068359375, 40.78125]),
+   // dr5ruxz
+   polyFromCorners([-73.97232055664062, 40.78125],
+                   [-73.970947265625, 40.779876708984375]),
+   // dr5ruzb
+   polyFromCorners([-73.970947265625, 40.78125],
+                   [-73.96957397460938, 40.779876708984375]),
+   // dr5ruzc
+   polyFromCorners([-73.96957397460938, 40.78125],
+                   [-73.96820068359375, 40.779876708984375]),
+   // dr5ruxx
+   polyFromCorners([-73.97232055664062, 40.779876708984375],
+                   [-73.970947265625, 40.77850341796875]),
+   // dr5ruz8
+   polyFromCorners([-73.970947265625, 40.779876708984375],
+                   [-73.96957397460938, 40.77850341796875]),
+   // dr5ruz9
+   polyFromCorners([-73.96957397460938, 40.779876708984375],
+                   [-73.96820068359375, 40.77850341796875])]
+);
+
+geohashNeighbors.addPoint(
+  {id: "dr72h8p"},
+  midpointFromCorners([-73.97232055664062, 40.782623291015625],
+                      [-73.970947265625, 40.78125])
+);
+geohashNeighbors.addPoint(
+  {id: "dr72hb0"},
+  midpointFromCorners([-73.970947265625, 40.782623291015625],
+                      [-73.96957397460938, 40.78125])
+);
+geohashNeighbors.addPoint(
+  {id: "dr72hb1"},
+  midpointFromCorners([-73.96957397460938, 40.782623291015625],
+                      [-73.96820068359375, 40.78125])
+);
+geohashNeighbors.addPoint(
+  {id: "dr5ruxz"},
+  midpointFromCorners([-73.97232055664062, 40.78125],
+                      [-73.970947265625, 40.779876708984375])
+);
+geohashNeighbors.addPoint(
+  {id: "dr5ruzb"},
+  midpointFromCorners([-73.970947265625, 40.78125],
+                      [-73.96957397460938, 40.779876708984375])
+);
+geohashNeighbors.addPoint(
+  {id: "dr5ruzc"},
+  midpointFromCorners([-73.96957397460938, 40.78125],
+                      [-73.96820068359375, 40.779876708984375])
+);
+geohashNeighbors.addPoint(
+  {id: "dr5ruxx"},
+  midpointFromCorners([-73.97232055664062, 40.779876708984375],
+                      [-73.970947265625, 40.77850341796875])
+);
+geohashNeighbors.addPoint(
+  {id: "dr5ruz8"},
+  midpointFromCorners([-73.970947265625, 40.779876708984375],
+                      [-73.96957397460938, 40.77850341796875])
+);
+geohashNeighbors.addPoint(
+  {id: "dr5ruz9"},
+  midpointFromCorners([-73.96957397460938, 40.779876708984375],
+                      [-73.96820068359375, 40.77850341796875])
+);
+
+var map87 = new L.Map('map8.7');
+var map87base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
+var map87points = new L.GeoJSON(null, {
+  pointToLayer: function (latLon) {
+    return new L.CircleMarker(latLon, {
+      radius: 4,
+      fillColor: "#457FCD",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 1
+    });
+  }
+});
+map87points.on('featureparse', function(e) {
+  if (e.properties && e.properties.id) {
+    e.layer.bindPopup("" + e.properties.id);
+  }
+  if (e.geometryType == "Polygon") {
+    console.log(e);
+  }
+  if (e.properties && e.properties.style && e.layer.setStyle) {
+    e.layer.setStyle(e.properties.style);
+  }
+});
+map87points.addGeoJSON(geohashNeighbors);
+map87.setView(new L.LatLng(40.782231214064105, -73.96970272064209), 16)
+     .addLayer(map87base)
+     .addLayer(map87points);
