@@ -7,7 +7,7 @@
 var SUBDOMAINS = " a. b. c. d.".split(" "),
     MAKE_PROVIDER = function(layer, type, minZoom, maxZoom) {
         return {
-            "url":          ["http://{S}tile.stamen.com/", layer, "/{Z}/{X}/{Y}.", type].join(""),
+            "url":          ["http://localhost:8000/", layer, "/{Z}/{X}/{Y}.", type].join(""),
             "type":         type,
             "subdomains":   SUBDOMAINS.slice(),
             "minZoom":      minZoom,
@@ -93,18 +93,18 @@ if (typeof MM === "object") {
  */
 if (typeof L === "object") {
     L.StamenTileLayer = L.TileLayer.extend({
-        initialize: function(name) {
+        initialize: function(name, opts) {
             var provider = getProvider(name),
                 url = provider.url.replace(/({[A-Z]})/g, function(s) {
                     return s.toLowerCase();
                 });
-            L.TileLayer.prototype.initialize.call(this, url, {
+            L.TileLayer.prototype.initialize.call(this, url, L.Util.extend({
                 "minZoom":      provider.minZoom,
                 "maxZoom":      provider.maxZoom,
                 "subdomains":   SUBDOMAINS,
                 "scheme":       "xyz",
                 "attribution":  ATTRIBUTION
-            });
+            }, opts));
         }
     });
 }
