@@ -48,7 +48,10 @@ var addPopup = function(x, dir) {
   return x;
 };
 
-var centralPark = new L.LatLng(40.78, -73.97);
+////
+// figure 8.1
+//
+
 var bogota = {
   position: new L.LatLng(4.598056,-74.075833),
   content: contentStr("Bogotá", "4.60°N", "74.08°W")
@@ -82,6 +85,10 @@ var map81base = new L.StamenTileLayer('watercolor');
 map81.setView(new L.LatLng(26.03704188651584,-78.0908203125), 4)
      .addLayer(map81base)
      .addLayer(fig81);
+
+////
+// figures 8.2, 8.3, 8.6
+//
 
 L.FeatureCollection = L.Class.extend({
   initialize: function() {
@@ -192,3 +199,41 @@ map82points.addGeoJSON(wifiSampleGeohashLine);
 map82.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 16)
      .addLayer(map82base)
      .addLayer(map82points);
+
+////
+// figure 8.4
+//
+
+var centralPark = {
+  position: new L.LatLng(40.78, -73.97),
+  content: contentStr("Central Park", "40.78°N", "73.97°W")
+};
+addMarker(centralPark);
+addPopup(centralPark);
+
+var laGuardia = {
+  position: new L.LatLng(40.77, -73.87),
+  content: contentStr("LaGuardia Airport", "40.77°N", "73.87°W")
+};
+addMarker(laGuardia);
+addPopup(laGuardia);
+
+var jfk = {
+  position: new L.LatLng(40.64, -73.78),
+  content: contentStr("JFK International", "40.64°N", "73.78°W")
+};
+addMarker(jfk);
+addPopup(jfk);
+
+var map84 = new L.Map('map8.4');
+var fig84 = new L.LayerGroup();
+fig84.addLayer(centralPark.mark);
+fig84.addLayer(centralPark.pop);
+fig84.addLayer(laGuardia.mark);
+fig84.addLayer(laGuardia.pop);
+fig84.addLayer(jfk.mark);
+fig84.addLayer(jfk.pop);
+var map84base = new L.StamenTileLayer('watercolor');
+map84.setView(new L.LatLng(40.72852712420599,-73.90777587890625), 11)
+     .addLayer(map84base)
+     .addLayer(fig84);
