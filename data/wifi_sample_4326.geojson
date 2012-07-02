@@ -1,0 +1,40 @@
+{
+"type": "FeatureCollection",
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "ID": 441.0, "NAME": "Fedex Kinko's", "ADDRESS": "641 Lexington Avenue", "CITY": "New York", "URL": "http:\/\/www.FedexKinkos.com", "PHONE": "212-572-9995", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.969747592636452, 40.758909194622156 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 442.0, "NAME": "Fedex Kinko's", "ADDRESS": "153 East 53rd Street", "CITY": "New York", "URL": "http:\/\/www.FedexKinkos.com", "PHONE": "212-753-7580", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.969932026372277, 40.758151695276176 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 463.0, "NAME": "Smilers 707", "ADDRESS": "707 Lexington Ave", "CITY": "New York", "URL": null, "PHONE": "212-980-0890", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.968735877455288, 40.761074527800304 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 472.0, "NAME": "Juan Valdez NYC", "ADDRESS": "140 East 57th Street", "CITY": "New York", "URL": null, "PHONE": null, "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.968804736895422, 40.760487172496383 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 219.0, "NAME": "Startegy Atrium and Cafe", "ADDRESS": "115 E. 57th St.", "CITY": "New York", "URL": "http:\/\/www.openwifispots.com\/citylist_free_wifi_wireless_hotspot-New_York_NY.aspx", "PHONE": null, "TYPE": "Free", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.969749931608533, 40.761708834717453 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 388.0, "NAME": "Barnes & Noble", "ADDRESS": "160 E 54th Street", "CITY": "New York", "URL": "http:\/\/www.barnesandnobleinc.com", "PHONE": null, "TYPE": "Free", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.969783871937608, 40.758505727737244 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 525.0, "NAME": "McDonalds", "ADDRESS": "966 3rd Avenue", "CITY": "New York", "URL": "http:\/\/www.mcdonalds.com\/wireless.html", "PHONE": "212-753-5360", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.967465331208132, 40.760893023650972 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 564.0, "NAME": "Public Telephone", "ADDRESS": "900 3rd Avenue", "CITY": "New York", "URL": null, "PHONE": "212-965-8800", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.96910154979868, 40.758730614883831 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 593.0, "NAME": "Starbucks", "ADDRESS": "116 E. 57th Street", "CITY": "New York", "URL": "http:\/\/www.starbucks.com", "PHONE": "212-486-1632", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.970006551753428, 40.760987034192958 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 615.0, "NAME": "Starbucks", "ADDRESS": "599 Lexington Ave", "CITY": "New York", "URL": "http:\/\/www.starbucks.com", "PHONE": "212-754-1864", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.970719058418325, 40.757838995951374 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 635.0, "NAME": "Starbucks", "ADDRESS": "630 Lexington Ave", "CITY": "New York", "URL": "http:\/\/www.starbucks.com", "PHONE": "212-521-8075", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.971491012005487, 40.758997471942095 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 742.0, "NAME": "The UPS Store", "ADDRESS": "954 3rd Ave", "CITY": "New York", "URL": "http:\/\/www.theupsstore.com\/", "PHONE": "212-319-1928", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.967703717408568, 40.760596658399315 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 870.0, "NAME": "Starbucks", "ADDRESS": "655 Lexington Avenue", "CITY": "New York", "URL": "http:\/\/www.starbucks.com", "PHONE": "212-308-5717", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.96992760082469, 40.759281704654946 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 875.0, "NAME": "Starbucks", "ADDRESS": "731 Lexington Avenue", "CITY": "New York", "URL": "http:\/\/www.starbucks.com", "PHONE": "212-644-0692", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.967667188696851, 40.761485611188697 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 1032.0, "NAME": "The Seagram Building", "ADDRESS": "375 Park Ave.", "CITY": "New York", "URL": null, "PHONE": null, "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.972011507584256, 40.758382852166029 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 1132.0, "NAME": "Gourmet Food", "ADDRESS": "707 Lexington Ave", "CITY": "New York", "URL": null, "PHONE": "212-980-0890", "TYPE": "Fee-based", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.968814055106762, 40.761106816745965 ] } }
+,
+{ "type": "Feature", "properties": { "ID": 1179.0, "NAME": "NYC Public Library - 58th  St  Branch", "ADDRESS": "127 E 58 Street", "CITY": "New York", "URL": "http:\/\/www.nypl.org\/branch\/services\/wifi.html", "PHONE": "212-759-7358", "TYPE": "Free", "ZIP": "10022" }, "geometry": { "type": "Point", "coordinates": [ -73.969323746251632, 40.762232138351671 ] } }
+
+]
+}

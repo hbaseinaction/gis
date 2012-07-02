@@ -1,0 +1,18 @@
+X	Y	ID	NAME	ADDRESS	CITY	URL	PHONE	TYPE	ZIP
+-73.96974759	40.75890919	441	Fedex Kinko's	641 Lexington Avenue	New York	http://www.FedexKinkos.com	212-572-9995	Fee-based	10022
+-73.96993203	40.75815170	442	Fedex Kinko's	153 East 53rd Street	New York	http://www.FedexKinkos.com	212-753-7580	Fee-based	10022
+-73.96873588	40.76107453	463	Smilers 707	707 Lexington Ave	New York		212-980-0890	Fee-based	10022
+-73.96880474	40.76048717	472	Juan Valdez NYC	140 East 57th Street	New York			Fee-based	10022
+-73.96974993	40.76170883	219	Startegy Atrium and Cafe	115 E. 57th St.	New York	http://www.openwifispots.com/citylist_free_wifi_wireless_hotspot-New_York_NY.aspx		Free	10022
+-73.96978387	40.75850573	388	Barnes & Noble	160 E 54th Street	New York	http://www.barnesandnobleinc.com		Free	10022
+-73.96746533	40.76089302	525	McDonalds	966 3rd Avenue	New York	http://www.mcdonalds.com/wireless.html	212-753-5360	Fee-based	10022
+-73.96910155	40.75873061	564	Public Telephone	900 3rd Avenue	New York		212-965-8800	Fee-based	10022
+-73.97000655	40.76098703	593	Starbucks	116 E. 57th Street	New York	http://www.starbucks.com	212-486-1632	Fee-based	10022
+-73.97071906	40.75783900	615	Starbucks	599 Lexington Ave	New York	http://www.starbucks.com	212-754-1864	Fee-based	10022
+-73.97149101	40.75899747	635	Starbucks	630 Lexington Ave	New York	http://www.starbucks.com	212-521-8075	Fee-based	10022
+-73.96770372	40.76059666	742	The UPS Store	954 3rd Ave	New York	http://www.theupsstore.com/	212-319-1928	Fee-based	10022
+-73.96992760	40.75928170	870	Starbucks	655 Lexington Avenue	New York	http://www.starbucks.com	212-308-5717	Fee-based	10022
+-73.96766719	40.76148561	875	Starbucks	731 Lexington Avenue	New York	http://www.starbucks.com	212-644-0692	Fee-based	10022
+-73.97201151	40.75838285	1032	The Seagram Building	375 Park Ave.	New York			Fee-based	10022
+-73.96881406	40.76110682	1132	Gourmet Food	707 Lexington Ave	New York		212-980-0890	Fee-based	10022
+-73.96932375	40.76223214	1179	NYC Public Library - 58th  St  Branch	127 E 58 Street	New York	http://www.nypl.org/branch/services/wifi.html	212-759-7358	Free	10022
