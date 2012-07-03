@@ -386,79 +386,15 @@ map87b.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 15)
 var geohashNeighbors = new L.FeatureCollection();
 geohashNeighbors.addPolygon(
   boxStyle,
-  // dr72h8p
-  [polyFromCorners([-73.97232055664062, 40.782623291015625],
-                   [-73.970947265625, 40.78125]),
-   // dr72hb0
-   polyFromCorners([-73.970947265625, 40.782623291015625],
-                   [-73.96957397460938, 40.78125]),
-   // dr72hb1
-   polyFromCorners([-73.96957397460938, 40.782623291015625],
-                   [-73.96820068359375, 40.78125]),
-   // dr5ruxz
-   polyFromCorners([-73.97232055664062, 40.78125],
-                   [-73.970947265625, 40.779876708984375]),
-   // dr5ruzb
-   polyFromCorners([-73.970947265625, 40.78125],
-                   [-73.96957397460938, 40.779876708984375]),
-   // dr5ruzc
-   polyFromCorners([-73.96957397460938, 40.78125],
-                   [-73.96820068359375, 40.779876708984375]),
-   // dr5ruxx
-   polyFromCorners([-73.97232055664062, 40.779876708984375],
-                   [-73.970947265625, 40.77850341796875]),
-   // dr5ruz8
-   polyFromCorners([-73.970947265625, 40.779876708984375],
-                   [-73.96957397460938, 40.77850341796875]),
-   // dr5ruz9
-   polyFromCorners([-73.96957397460938, 40.779876708984375],
-                   [-73.96820068359375, 40.77850341796875])]
-);
-
-geohashNeighbors.addPoint(
-  {id: "dr72h8p"},
-  midpointFromCorners([-73.97232055664062, 40.782623291015625],
-                      [-73.970947265625, 40.78125])
-);
-geohashNeighbors.addPoint(
-  {id: "dr72hb0"},
-  midpointFromCorners([-73.970947265625, 40.782623291015625],
-                      [-73.96957397460938, 40.78125])
-);
-geohashNeighbors.addPoint(
-  {id: "dr72hb1"},
-  midpointFromCorners([-73.96957397460938, 40.782623291015625],
-                      [-73.96820068359375, 40.78125])
-);
-geohashNeighbors.addPoint(
-  {id: "dr5ruxz"},
-  midpointFromCorners([-73.97232055664062, 40.78125],
-                      [-73.970947265625, 40.779876708984375])
-);
-geohashNeighbors.addPoint(
-  {id: "dr5ruzb"},
-  midpointFromCorners([-73.970947265625, 40.78125],
-                      [-73.96957397460938, 40.779876708984375])
-);
-geohashNeighbors.addPoint(
-  {id: "dr5ruzc"},
-  midpointFromCorners([-73.96957397460938, 40.78125],
-                      [-73.96820068359375, 40.779876708984375])
-);
-geohashNeighbors.addPoint(
-  {id: "dr5ruxx"},
-  midpointFromCorners([-73.97232055664062, 40.779876708984375],
-                      [-73.970947265625, 40.77850341796875])
-);
-geohashNeighbors.addPoint(
-  {id: "dr5ruz8"},
-  midpointFromCorners([-73.970947265625, 40.779876708984375],
-                      [-73.96957397460938, 40.77850341796875])
-);
-geohashNeighbors.addPoint(
-  {id: "dr5ruz9"},
-  midpointFromCorners([-73.96957397460938, 40.779876708984375],
-                      [-73.96820068359375, 40.77850341796875])
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr72h8p')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr72hb0')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr72hb1')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr5ruxz')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr5ruzb')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr5ruzc')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr5ruxx')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr5ruz8')),
+   polyFromCorners.apply(undefined, decodeGeoHash('dr5ruz9'))]
 );
 
 var map88 = new L.Map('map8.8');
