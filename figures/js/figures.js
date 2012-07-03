@@ -224,7 +224,7 @@ map82points.on('featureparse', function(e) {
 map82points.addGeoJSON(wifiSample);
 // for 8.3:
 //map82points.addGeoJSON(wifiSampleXYLine);
-// for 8.7
+// for 8.7(a)
 map82points.addGeoJSON(wifiSampleGeohashLine);
 map82.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 16)
      .addLayer(map82base)
@@ -301,6 +301,83 @@ var map85base = new L.StamenTileLayer('watercolor');
 map85.setView(new L.LatLng(40.72852712420599,-73.90777587890625), 11)
      .addLayer(map85base)
      .addLayer(fig85);
+
+////
+// figure 8.7(b)
+//
+
+var wifiSampleGeohashBoxes = new L.FeatureCollection();
+// wifiSampleGeohashBoxes.addPolygon(
+//   boxStyle,
+//   [polyFromCorners.apply(undefined, decodeGeoHash('dr5rugb'))]
+// );
+// wifiSampleGeohashBoxes.addPolygon(
+//   boxStyle,
+//   [polyFromCorners.apply(undefined, decodeGeoHash('dr5rugc'))]
+// );
+// wifiSampleGeohashBoxes.addPolygon(
+//   boxStyle,
+//   [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruu1'))]
+// );
+// wifiSampleGeohashBoxes.addPolygon(
+//   boxStyle,
+//   [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruu2'))]
+// );
+// wifiSampleGeohashBoxes.addPolygon(
+//   boxStyle,
+//   [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruu3'))]
+// );
+wifiSampleGeohashBoxes.addPolygon(
+  boxStyle,
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruu6'))]
+);
+
+wifiSampleGeohashBoxes.addPolygon(
+  {style: {
+     color: "#EF3236",
+     weight: 2,
+     opacity: 0.8
+   }},
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr5rug'))]
+);
+wifiSampleGeohashBoxes.addPolygon(
+  {style: {
+     color: "#EF3236",
+     weight: 2,
+     opacity: 0.8
+   }},
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruu'))]
+);
+
+var map87b = new L.Map('map8.7b');
+var map87bbase = new L.StamenTileLayer('watercolor', {opacity: 0.4});
+var map87bpoints = new L.GeoJSON(null, {
+  pointToLayer: function (latLon) {
+    return new L.CircleMarker(latLon, {
+      radius: 4,
+      fillColor: "#457FCD",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 1
+    });
+  }
+});
+map87bpoints.on('featureparse', function(e) {
+  if (e.properties && e.properties.id) {
+    e.layer.bindPopup("" + e.properties.id);
+  }
+  if (e.properties && e.properties.style && e.layer.setStyle) {
+    e.layer.setStyle(e.properties.style);
+  }
+});
+map87bpoints.addGeoJSON(wifiSample);
+map87bpoints.addGeoJSON(wifiSampleGeohashLine);
+// for 8.7(b)
+map87bpoints.addGeoJSON(wifiSampleGeohashBoxes);
+map87b.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 15)
+      .addLayer(map87bbase)
+      .addLayer(map87bpoints);
 
 ////
 // figure 8.8
