@@ -1,5 +1,13 @@
 var popOpts = {closeButton:false};
 
+var boxStyle = {
+  style: {
+    color: "#457FCD",
+    weight: 2,
+    opacity: 0.8
+  }
+};
+
 L.PopupLeft = L.Popup.extend({
   initialize: function(options, source) {
     opts = {
@@ -48,47 +56,18 @@ var addPopup = function(x, dir) {
   return x;
 };
 
-////
-// figure 8.1
-//
-
-var bogota = {
-  position: new L.LatLng(4.598056,-74.075833),
-  content: contentStr("Bogotá", "4.60°N", "74.08°W")
+var polyFromCorners = function(a, b) {
+  return [[a[0], a[1]],
+          [a[0], b[1]],
+          [b[0], b[1]],
+          [b[0], a[1]],
+          [a[0], a[1]]];
 };
-addMarker(bogota);
-addPopup(bogota);
 
-var nyc = {
-  position: new L.LatLng(40.664167,-73.938611),
-  content: contentStr("New York City", "40.66°N", "73.94°W")
+var midpointFromCorners = function(a, b) {
+  return [(a[0] + b[0]) / 2,
+          (a[1] + b[1]) / 2];
 };
-addMarker(nyc);
-addPopup(nyc);
-
-var dc = {
-  position: new L.LatLng(38.895111,-77.036667),
-  content: contentStr("Washington, DC", "38.90°N", "77.04°W")
-};
-addMarker(dc);
-addPopup(dc);
-
-var map81 = new L.Map('map8.1');
-var fig81 = new L.LayerGroup();
-fig81.addLayer(dc.mark);
-fig81.addLayer(dc.pop);
-fig81.addLayer(nyc.mark);
-fig81.addLayer(nyc.pop);
-fig81.addLayer(bogota.mark);
-fig81.addLayer(bogota.pop);
-var map81base = new L.StamenTileLayer('watercolor');
-map81.setView(new L.LatLng(26.03704188651584,-78.0908203125), 4)
-     .addLayer(map81base)
-     .addLayer(fig81);
-
-////
-// figures 8.2, 8.3, 8.6
-//
 
 L.FeatureCollection = L.Class.extend({
   initialize: function() {
@@ -132,6 +111,48 @@ L.FeatureCollection = L.Class.extend({
     return this;
   }
 });
+
+////
+// figure 8.1
+//
+
+var bogota = {
+  position: new L.LatLng(4.598056,-74.075833),
+  content: contentStr("Bogotá", "4.60°N", "74.08°W")
+};
+addMarker(bogota);
+addPopup(bogota);
+
+var nyc = {
+  position: new L.LatLng(40.664167,-73.938611),
+  content: contentStr("New York City", "40.66°N", "73.94°W")
+};
+addMarker(nyc);
+addPopup(nyc);
+
+var dc = {
+  position: new L.LatLng(38.895111,-77.036667),
+  content: contentStr("Washington, DC", "38.90°N", "77.04°W")
+};
+addMarker(dc);
+addPopup(dc);
+
+var map81 = new L.Map('map8.1');
+var fig81 = new L.LayerGroup();
+fig81.addLayer(dc.mark);
+fig81.addLayer(dc.pop);
+fig81.addLayer(nyc.mark);
+fig81.addLayer(nyc.pop);
+fig81.addLayer(bogota.mark);
+fig81.addLayer(bogota.pop);
+var map81base = new L.StamenTileLayer('watercolor');
+map81.setView(new L.LatLng(26.03704188651584,-78.0908203125), 4)
+     .addLayer(map81base)
+     .addLayer(fig81);
+
+////
+// figures 8.2, 8.3, 8.6
+//
 
 var wifiSample = new L.FeatureCollection();
 wifiSample.addPoint({id: 441, name: "Fedex Kinko's"}, [-73.96974759, 40.75890919])
@@ -203,7 +224,7 @@ map82points.on('featureparse', function(e) {
 map82points.addGeoJSON(wifiSample);
 // for 8.3:
 //map82points.addGeoJSON(wifiSampleXYLine);
-// for 8.6
+// for 8.7
 map82points.addGeoJSON(wifiSampleGeohashLine);
 map82.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 16)
      .addLayer(map82base)
@@ -211,6 +232,40 @@ map82.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 16)
 
 ////
 // figure 8.4
+//
+
+var map84 = new L.Map('map8.4');
+var map84base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
+var map84polys = new L.GeoJSON();
+map84polys.on('featureparse', function(e) {
+  if (e.properties && e.properties.geohash) {
+    e.layer.bindPopup(e.properties.geohash);
+  }
+  if (e.properties && e.properties.style && e.layer.setStyle) {
+    e.layer.setStyle(e.properties.style);
+  }
+});
+var map84hashes = new L.FeatureCollection();
+// dr5ruzb8wnfr
+map84hashes.addPolygon(
+  boxStyle,
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruzb'))]
+);
+map84hashes.addPolygon(
+  boxStyle,
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr5ruz'))]
+);
+map84hashes.addPolygon(
+  boxStyle,
+  [polyFromCorners.apply(undefined, decodeGeoHash('dr5ru'))]
+);
+map84polys.addGeoJSON(map84hashes);
+map84.setView(new L.LatLng(40.75974059207392, -73.98262023925781), 13)
+     .addLayer(map84base)
+     .addLayer(map84polys);
+
+////
+// figure 8.5
 //
 
 var centralPark = {
@@ -234,43 +289,26 @@ var jfk = {
 addMarker(jfk);
 addPopup(jfk);
 
-var map84 = new L.Map('map8.4');
-var fig84 = new L.LayerGroup();
-fig84.addLayer(centralPark.mark);
-fig84.addLayer(centralPark.pop);
-fig84.addLayer(laGuardia.mark);
-fig84.addLayer(laGuardia.pop);
-fig84.addLayer(jfk.mark);
-fig84.addLayer(jfk.pop);
-var map84base = new L.StamenTileLayer('watercolor');
-map84.setView(new L.LatLng(40.72852712420599,-73.90777587890625), 11)
-     .addLayer(map84base)
-     .addLayer(fig84);
+var map85 = new L.Map('map8.5');
+var fig85 = new L.LayerGroup();
+fig85.addLayer(centralPark.mark);
+fig85.addLayer(centralPark.pop);
+fig85.addLayer(laGuardia.mark);
+fig85.addLayer(laGuardia.pop);
+fig85.addLayer(jfk.mark);
+fig85.addLayer(jfk.pop);
+var map85base = new L.StamenTileLayer('watercolor');
+map85.setView(new L.LatLng(40.72852712420599,-73.90777587890625), 11)
+     .addLayer(map85base)
+     .addLayer(fig85);
 
 ////
-// figure 8.7
+// figure 8.8
 //
-
-var polyFromCorners = function(a, b) {
-  return [[a[0], a[1]],
-          [a[0], b[1]],
-          [b[0], b[1]],
-          [b[0], a[1]],
-          [a[0], a[1]]];
-};
-
-var midpointFromCorners = function(a, b) {
-  return [(a[0] + b[0]) / 2,
-          (a[1] + b[1]) / 2];
-};
 
 var geohashNeighbors = new L.FeatureCollection();
 geohashNeighbors.addPolygon(
-  {style: {
-     color: "#457FCD",
-     weight: 2,
-     opacity: 0.8
-   }},
+  boxStyle,
   // dr72h8p
   [polyFromCorners([-73.97232055664062, 40.782623291015625],
                    [-73.970947265625, 40.78125]),
@@ -346,9 +384,9 @@ geohashNeighbors.addPoint(
                       [-73.96820068359375, 40.77850341796875])
 );
 
-var map87 = new L.Map('map8.7');
-var map87base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
-var map87points = new L.GeoJSON(null, {
+var map88 = new L.Map('map8.8');
+var map88base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
+var map88points = new L.GeoJSON(null, {
   pointToLayer: function (latLon) {
     return new L.CircleMarker(latLon, {
       radius: 4,
@@ -360,7 +398,7 @@ var map87points = new L.GeoJSON(null, {
     });
   }
 });
-map87points.on('featureparse', function(e) {
+map88points.on('featureparse', function(e) {
   if (e.properties && e.properties.id) {
     e.layer.bindPopup("" + e.properties.id);
   }
@@ -368,13 +406,13 @@ map87points.on('featureparse', function(e) {
     e.layer.setStyle(e.properties.style);
   }
 });
-map87points.addGeoJSON(geohashNeighbors);
-map87.setView(new L.LatLng(40.782231214064105, -73.96970272064209), 16)
-     .addLayer(map87base)
-     .addLayer(map87points);
+map88points.addGeoJSON(geohashNeighbors);
+map88.setView(new L.LatLng(40.782231214064105, -73.96970272064209), 16)
+     .addLayer(map88base)
+     .addLayer(map88points);
 
 ////
-// figure 8.8
+// figure 8.9
 //
 
 var knnResults = new L.FeatureCollection();
@@ -420,9 +458,9 @@ geohashOverlay.addPolygon(
   $.extend({geohash: 'dr5rusx'}, geohashOverlayProps),
   [polyFromCorners.apply(undefined, decodeGeoHash('dr5rusx'))]);
 
-var map88 = new L.Map('map8.8');
-var map88base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
-var map88results = new L.GeoJSON(null, {
+var map89 = new L.Map('map8.9');
+var map89base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
+var map89results = new L.GeoJSON(null, {
   pointToLayer: function (latLon) {
     return new L.CircleMarker(latLon, {
       radius: 8,
@@ -434,7 +472,7 @@ var map88results = new L.GeoJSON(null, {
     });
   }
 });
-map88results.on('featureparse', function(e) {
+map89results.on('featureparse', function(e) {
   if (e.properties && e.properties.score) {
     e.layer.bindPopup("" + e.properties.score);
     if (e.properties.score == 1 && e.layer.setStyle) {
@@ -445,9 +483,9 @@ map88results.on('featureparse', function(e) {
     e.layer.setStyle(e.properties.style);
   }
 });
-map88results.addGeoJSON(knnResults);
-var map88geohash = new L.GeoJSON();
-map88geohash.on('featureparse', function(e) {
+map89results.addGeoJSON(knnResults);
+var map89geohash = new L.GeoJSON();
+map89geohash.on('featureparse', function(e) {
   if (e.properties && e.properties.geohash) {
     e.layer.bindPopup("" + e.properties.geohash);
   }
@@ -455,8 +493,8 @@ map88geohash.on('featureparse', function(e) {
     e.layer.setStyle(e.properties.style);
   }
 });
-map88geohash.addGeoJSON(geohashOverlay);
-var map88all = new L.GeoJSON(null, {
+map89geohash.addGeoJSON(geohashOverlay);
+var map89all = new L.GeoJSON(null, {
   pointToLayer: function(latLon) {
     return new L.CircleMarker(latLon, {
       radius: 4,
@@ -468,9 +506,9 @@ var map88all = new L.GeoJSON(null, {
     });
   }
 });
-map88all.addGeoJSON(wifiAll);
-map88.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 16)
-     .addLayer(map88base)
-     .addLayer(map88geohash)
-     .addLayer(map88all)
-     .addLayer(map88results);
+map89all.addGeoJSON(wifiAll);
+map89.setView(new L.LatLng(40.761690947411594, -73.97137641906738), 16)
+     .addLayer(map89base)
+     .addLayer(map89geohash)
+     .addLayer(map89all)
+     .addLayer(map89results);
