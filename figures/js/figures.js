@@ -407,7 +407,7 @@ map88points.on('featureparse', function(e) {
   }
 });
 map88points.addGeoJSON(geohashNeighbors);
-map88.setView(new L.LatLng(40.782231214064105, -73.96970272064209), 16)
+map88.setView(new L.LatLng(40.780557679970805, -73.97030353546143), 16)
      .addLayer(map88base)
      .addLayer(map88points);
 
