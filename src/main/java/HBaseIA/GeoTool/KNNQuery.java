@@ -19,7 +19,7 @@ import com.google.common.collect.MinMaxPriorityQueue;
 
 public class KNNQuery {
 
-  static final byte[] TABLE = "geo".getBytes();
+  static final byte[] TABLE = "wifi".getBytes();
   static final byte[] FAMILY = "a".getBytes();
   static final byte[] ID = "id".getBytes();
   static final byte[] X_COL = "lon".getBytes();

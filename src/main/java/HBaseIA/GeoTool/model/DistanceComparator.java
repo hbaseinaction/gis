@@ -15,10 +15,14 @@ public class DistanceComparator implements Comparator<QueryMatch> {
   }
 
   public int compare(QueryMatch o1, QueryMatch o2) {
-    double dist1 = origin.distance(o1.lon, o1.lat);
-    double dist2 = origin.distance(o2.lon, o2.lat);
-    if (dist1 < 0 || dist2 < 0)
+    if(Double.isNaN(o1.distance)) {
+      o1.distance = origin.distance(o1.lon, o1.lat);
+    }
+    if (Double.isNaN(o2.distance)) {
+      o2.distance = origin.distance(o2.lon, o2.lat);
+    }
+    if (o1.distance < 0 || o2.distance < 0)
       LOG.warn("negative distance detected!");
-    return Double.compare(dist1, dist2);
+    return Double.compare(o1.distance, o2.distance);
   }
 }
