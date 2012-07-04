@@ -1,8 +1,8 @@
 package HBaseIA.GeoTool;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Comparator;
+import java.util.Queue;
 
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.HTablePool;
@@ -43,10 +43,10 @@ public class KNNQuery {
     this.precision = characterPrecision;
   }
 
-  Collection<QueryMatch> takeN(Comparator<QueryMatch> comp,
+  Queue<QueryMatch> takeN(Comparator<QueryMatch> comp,
                                String prefix,
                                int n) throws IOException {
-    Collection<QueryMatch> candidates
+    Queue<QueryMatch> candidates
       = MinMaxPriorityQueue.orderedBy(comp)
       .maximumSize(n)
       .create();
@@ -55,7 +55,7 @@ public class KNNQuery {
     scan.setFilter(new PrefixFilter(prefix.getBytes()));
     scan.addFamily(FAMILY);
     scan.setMaxVersions(1);
-    scan.setCaching(1000);
+    scan.setCaching(50);
 
     HTableInterface table = pool.getTable(TABLE);
 
@@ -80,10 +80,10 @@ public class KNNQuery {
     return candidates;
   }
 
-  public Collection<QueryMatch> queryKNN(double lat, double lon, int n)
+  public Queue<QueryMatch> queryKNN(double lat, double lon, int n)
     throws IOException {
     DistanceComparator comp = new DistanceComparator(lon, lat);
-    Collection<QueryMatch> ret
+    Queue<QueryMatch> ret
       = MinMaxPriorityQueue.orderedBy(comp)
       .maximumSize(n)
       .create();
@@ -110,10 +110,11 @@ public class KNNQuery {
 
     HTablePool pool = new HTablePool();
     KNNQuery q = new KNNQuery(pool);
-    Collection<QueryMatch> ret = q.queryKNN(lat, lon, n);
+    Queue<QueryMatch> ret = q.queryKNN(lat, lon, n);
 
-    for (QueryMatch m : ret) {
-    	System.out.println(m);
+    QueryMatch m;
+    while ((m = ret.poll()) != null) {
+      System.out.println(m);
     }
 
     pool.close();

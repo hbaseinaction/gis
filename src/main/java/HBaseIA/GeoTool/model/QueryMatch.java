@@ -15,13 +15,7 @@ public class QueryMatch {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("<QueryMatch: ")
-      .append(id).append(", ")
-      .append(hash).append(", ")
-      .append(lon).append(", ")
-      .append(lat).append(", ")
-      .append(distance).append(">");
-    return sb.toString();
+    return String.format("<QueryMatch: %4s, %12s, %3.4f, %3.4f, %2.5f >",
+                         id, hash, lon, lat, distance);
   }
 }
