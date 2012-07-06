@@ -1,4 +1,4 @@
-package HBaseIA.GeoTool.model;
+package HBaseIA.GIS.model;
 
 import java.awt.geom.Point2D;
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package HBaseIA.GeoTool.predicates;
+package HBaseIA.GIS.filter;
 
 import java.io.DataInput;
 import java.io.DataOutput;

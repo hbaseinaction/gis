@@ -1,4 +1,4 @@
-package HBaseIA.GeoTool;
+package HBaseIA.GIS;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,8 +15,8 @@ import org.apache.hadoop.hbase.filter.Filter;
 import org.apache.hadoop.hbase.filter.FilterList;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
 
-import HBaseIA.GeoTool.model.QueryMatch;
-import HBaseIA.GeoTool.predicates.WithinFilter;
+import HBaseIA.GIS.filter.WithinFilter;
+import HBaseIA.GIS.model.QueryMatch;
 import ch.hsr.geohash.BoundingBox;
 import ch.hsr.geohash.GeoHash;
 

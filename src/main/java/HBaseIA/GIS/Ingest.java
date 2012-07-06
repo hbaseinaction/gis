@@ -1,4 +1,4 @@
-package HBaseIA.GeoTool;
+package HBaseIA.GIS;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

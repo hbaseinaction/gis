@@ -1,4 +1,4 @@
-package HBaseIA.GeoTool;
+package HBaseIA.GIS;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -11,8 +11,8 @@ import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.filter.PrefixFilter;
 
-import HBaseIA.GeoTool.model.DistanceComparator;
-import HBaseIA.GeoTool.model.QueryMatch;
+import HBaseIA.GIS.model.DistanceComparator;
+import HBaseIA.GIS.model.QueryMatch;
 import ch.hsr.geohash.GeoHash;
 
 import com.google.common.collect.MinMaxPriorityQueue;

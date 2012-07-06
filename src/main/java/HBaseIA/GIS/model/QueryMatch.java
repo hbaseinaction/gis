@@ -1,4 +1,4 @@
-package HBaseIA.GeoTool.model;
+package HBaseIA.GIS.model;
 
 public class QueryMatch {
   public String id;
