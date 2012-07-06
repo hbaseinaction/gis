@@ -739,13 +739,79 @@ map812.setView(new L.LatLng(40.75728631362887, -73.9857530593872), 15)
       .addLayer(map812geo6a)
       .addLayer(queryLayer);
 
-var geohash8126a = new L.FeatureCollection();
-geohash8126a.addPolygon(
-  $.extend({geohash: 'dr5ru7',
-            style: {
-              color: "#000",
-              weight: 2,
-              opacity: 0.2
-            }}, geohashOverlayProps),
-  [polyFromCorners.apply(undefined, decodeGeoHash('dr5ru7'))]);
+////
+// figure 8.13
+//
 
+var timesSquareResults = new L.FeatureCollection();
+timesSquareResults.addPoint({id:  644, geohash: 'dr5ru7tt72wm'},[-73.9852, 40.7574]);
+timesSquareResults.addPoint({id:  634, geohash: 'dr5rukjkhsd0'},[-73.9855, 40.7600]);
+timesSquareResults.addPoint({id:  847, geohash: 'dr5ru7q2tn3k'},[-73.9841, 40.7553]);
+timesSquareResults.addPoint({id: 1294, geohash: 'dr5ru7hpn094'},[-73.9872, 40.7550]);
+timesSquareResults.addPoint({id:  569, geohash: 'dr5ru7rxeqn2'},[-73.9825, 40.7565]);
+timesSquareResults.addPoint({id:  732, geohash: 'dr5ru7fvm5jh'},[-73.9889, 40.7588]);
+timesSquareResults.addPoint({id:  580, geohash: 'dr5rukn9brrk'},[-73.9840, 40.7596]);
+timesSquareResults.addPoint({id:  445, geohash: 'dr5ru7zsemkp'},[-73.9825, 40.7587]);
+timesSquareResults.addPoint({id:  517, geohash: 'dr5ru7yhj0n3'},[-73.9845, 40.7586]);
+timesSquareResults.addPoint({id:  372, geohash: 'dr5ru7m0bm8m'},[-73.9860, 40.7553]);
+timesSquareResults.addPoint({id:  516, geohash: 'dr5rue8nk1y4'},[-73.9818, 40.7576]);
+timesSquareResults.addPoint({id:  514, geohash: 'dr5ru77myu3f'},[-73.9882, 40.7562]);
+timesSquareResults.addPoint({id:  566, geohash: 'dr5rukk42vj7'},[-73.9874, 40.7611]);
+timesSquareResults.addPoint({id:  656, geohash: 'dr5ru7e5hcp5'},[-73.9886, 40.7571]);
+timesSquareResults.addPoint({id:  640, geohash: 'dr5rukhnyc3x'},[-73.9871, 40.7604]);
+timesSquareResults.addPoint({id:  653, geohash: 'dr5ru7epfg17'},[-73.9887, 40.7579]);
+timesSquareResults.addPoint({id:  570, geohash: 'dr5ru7fvdecd'},[-73.9890, 40.7589]);
+timesSquareResults.addPoint({id: 1313, geohash: 'dr5ru7k6h9ub'},[-73.9869, 40.7555]);
+timesSquareResults.addPoint({id:  403, geohash: 'dr5ru7hv4vyw'},[-73.9863, 40.7547]);
+timesSquareResults.addPoint({id:  750, geohash: 'dr5ru7ss0bu1'},[-73.9867, 40.7572]);
+timesSquareResults.addPoint({id:  515, geohash: 'dr5ru7g0bgy5'},[-73.9888, 40.7581]);
+timesSquareResults.addPoint({id:  669, geohash: 'dr5ru7hzsnz1'},[-73.9862, 40.7551]);
+timesSquareResults.addPoint({id:  631, geohash: 'dr5ru7t33776'},[-73.9857, 40.7568]);
+timesSquareResults.addPoint({id:  637, geohash: 'dr5ru7xxuccw'},[-73.9824, 40.7579]);
+timesSquareResults.addPoint({id: 1337, geohash: 'dr5ru7dsdf6g'},[-73.9894, 40.7573]);
+timesSquareResults.addPoint({id:  565, geohash: 'dr5rukp0fp9v'},[-73.9832, 40.7594]);
+
+var filteredWifiAll = new L.FeatureCollection();
+filteredWifiAll.features = $.map(wifiAll.features, function(e, idx) {
+  var baseId = e.properties.ID;
+  var matches = $.map(timesSquareResults.features, function(e, idx) {
+    return (e.properties.id == baseId) ? baseId : null;
+  });
+  return (matches.length > 0) ? null : e;
+});
+
+var map813results = new L.GeoJSON(null, {
+  pointToLayer: function(latLon) {
+    return new L.CircleMarker(latLon, {
+      radius: 4,
+      fillColor: "#457FCD",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 1
+    });
+  }
+});
+map813results.addGeoJSON(timesSquareResults);
+
+var map813 = new L.Map('map8.13');
+var map813base = new L.StamenTileLayer('watercolor', {opacity: 0.4});
+var map813all = new L.GeoJSON(null, {
+  pointToLayer: function(latLon) {
+    return new L.CircleMarker(latLon, {
+      radius: 4,
+      fillColor: "#CECECE",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    });
+  }
+});
+
+map813all.addGeoJSON(filteredWifiAll);
+map813.setView(new L.LatLng(40.75728631362887, -73.9857530593872), 16)
+      .addLayer(map813base)
+      .addLayer(map813all)
+      .addLayer(queryLayer)
+      .addLayer(map813results);
