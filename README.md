@@ -14,7 +14,7 @@ utility to be of use.
 
 To build a self-contained jar:
 
-    $ mvn assembly:assembly
+    $ mvn package
 
 The jar created using this by default will allow you to interact with
 HBase running in standalone mode on your local machine. If you want
@@ -43,21 +43,21 @@ with our sample data. For example, to populate a table called `wifi`,
 issue these commands:
 
     $ echo "create 'wifi', 'a'" | hbase shell
-    $ java -cp target/hbaseia-gis-1.0.0-SNAPSHOT-jar-with-dependencies.jar \
+    $ java -cp target/hbaseia-gis-1.0.0.jar \
       HBaseIA.GeoTool.Ingest wifi data/wifi_4326.txt
 
 Once your data is loaded, two queries have been implemented. The first
 one is k-nearest neighbors. This query is implemented entirely
 client-side and can be run immediately.
 
-    $ java -cp target/hbaseia-gis-1.0.0-SNAPSHOT-jar-with-dependencies.jar \
-    HBaseIA.GIS.KNNQuery -73.97000655 40.76098703 5
+    $ java -cp target/hbaseia-gis-1.0.0.jar \
+      HBaseIA.GIS.KNNQuery -73.97000655 40.76098703 5
 
 The second query is for all points within a query polygon. There are
 two implementations, a local and remove version. The local version is
 implemented entirely client-side and can be run like the `KNNQuery`.
 
-    $ java -cp target/hbaseia-gis-1.0.0-SNAPSHOT-jar-with-dependencies.jar \
+    $ java -cp target/hbaseia-gis-1.0.0.jar \
       HBaseIA.GIS.WithinQuery local \
       "POLYGON ((-73.980844 40.758703, \
                  -73.987214 40.761369, \
@@ -71,13 +71,13 @@ requires installation. This requires editing your
 repository to your HBASE_CLASSPATH environment variable.
 
     # Extra Java CLASSPATH elements.  Optional.
-    export HBASE_CLASSPATH=/path/to/target/hbaseia-gis-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+    export HBASE_CLASSPATH=/path/to/hbaseia-gis-1.0.0.jar
 
 Restart HBase.
 
 Now you can run the query:
 
-    $ java -cp target/hbaseia-gis-1.0.0-SNAPSHOT-jar-with-dependencies.jar \
+    $ java -cp target/hbaseia-gis-1.0.0.jar \
       HBaseIA.GIS.WithinQuery remote \
       "POLYGON ((-73.980844 40.758703, \
                  -73.987214 40.761369, \
